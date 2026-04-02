@@ -1,0 +1,22 @@
+[Unit]
+Description=Virtual Personal Assistant (VPA)
+After=network.target sound.target
+
+[Service]
+Type=simple
+User=YOUR_USERNAME
+WorkingDirectory=/home/YOUR_USERNAME/vpa_env/VPA
+Environment="PATH=/home/YOUR_USERNAME/vpa_env/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+Environment="PYTHONPATH=/home/YOUR_USERNAME/vpa_env/VPA"
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/home/YOUR_USERNAME/.Xauthority"
+ExecStart=/home/YOUR_USERNAME/vpa_env/bin/python /home/YOUR_USERNAME/vpa_env/VPA/main.py
+Restart=on-failure
+RestartSec=10
+
+# Audio/video permissions
+Environment="PULSE_SERVER=unix:/run/user/1000/pulse/native"
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,32 @@
+#!/bin/bash
+# Alarm Sound Setup
+# This script helps you create or download an alarm sound
+
+ALARM_SOUND_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+echo "==================================="
+echo "Alarm Sound Setup for VPA"
+echo "==================================="
+echo ""
+echo "The VPA needs an 'alarm.wav' file for timers and alarms."
+echo "You have several options:"
+echo ""
+echo "Option 1: Download a free alarm sound"
+echo "  wget -O alarm.wav https://assets.mixkit.co/active_storage/sfx/286/sfx-286.mp3"
+echo "  Then convert to WAV: ffmpeg -i alarm.wav alarm.wav (or use any .wav file)"
+echo ""
+echo "Option 2: Generate a beep sound (requires sox)"
+echo "  sox -n -r 44100 -c 2 alarm.wav synth 0.5 sine 880"
+echo ""
+echo "Option 3: Use any .wav file you already have"
+echo "  Copy your file to: $ALARM_SOUND_DIR/alarm.wav"
+echo ""
+echo "Option 4: Convert from MP3 to WAV"
+echo "  ffmpeg -i your_alarm.mp3 alarm.wav"
+echo ""
+echo "Once you have alarm.wav, place it in:"
+echo "  $ALARM_SOUND_DIR/"
+echo ""
+echo "To test the alarm sound:"
+echo "  python3 -c \"from pygame import mixer; mixer.init(); mixer.music.load('alarm.wav'); mixer.music.play(); input('Press Enter to stop...')\""
+echo ""
